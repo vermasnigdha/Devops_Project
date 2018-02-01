@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/webflow
+http://www.springframework.org/schema/webflow/spring-webflow-2.4.xsd">
+ 
+ 	<var name="cart" class="com.pets.MyController"/>
+ 
+ 	<action-state id="TestLogin">
+ 		<evaluate expression="cart.test()"/>
+ 			<transition to="ViewCart" on="loggedin" />
+        	<transition to="LoginPage" on="notloggedin" />
+ 	</action-state>
+ 
+ 	<view-state id="LoginPage" view="/WEB-INF/views/LoginPage.jsp"/>
+ 
+	<view-state id="ViewCart" view="/WEB-INF/views/flows/ViewCart.jsp">
+		<transition to="ViewAddress" on="goToPage2" />
+	</view-state>
+	
+	<view-state id="ViewAddress" view="/WEB-INF/views/flows/ViewAddress.jsp">
+		<transition to="ViewCart" on="goToPage1" />
+		<transition to="ViewInvoice" on="goToPage3" />
+	</view-state>
+	 
+	 <view-state id="ViewInvoice" view="/WEB-INF/views/flows/ViewInvoice.jsp">
+		<transition to="ViewAddress" on="goToPage2" />
+		<transition to="OrderComplete" on="goToPage4" />
+	</view-state>
+	  
+	<end-state id="OrderComplete" view="/WEB-INF/views/flows/OrderComplete.jsp"/>
+	
+</flow>
