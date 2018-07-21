@@ -81,7 +81,7 @@
 	
 		<tr style="text-align: center;">
 				<th>NAME</th>
-				<th>DESCRIPTION</th>
+				<th>WEIGHT (Grams)</th>
 				<th>PRICE</th>
 				<th>QUANTITY</th>
 				<th>IMAGE</th>
@@ -95,7 +95,7 @@
 			<td>${Breed.getName()}</td>
 			<td>${Breed.getAverage_weight()}</td>
 			<td>${Breed.getPrice()}</td>
-			<td>1</td>
+			<td>${Breed.getQty()}</</td>
 			<td><img src="${Breed.getImagePath()}" style="height: 50px; width: 50px;"></td>
 		</tr>
 	</tbody>

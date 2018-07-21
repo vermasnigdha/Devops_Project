@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public class BreedDAOImpl implements BreedDAO {
 
-	@Autowired
+ 	@Autowired
 	SessionFactory sessionFactory;
 	
 	public void insert(Breed b) {

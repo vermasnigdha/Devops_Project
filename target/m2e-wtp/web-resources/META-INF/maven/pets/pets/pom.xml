@@ -82,12 +82,13 @@
 </dependency>
 		
   
-  <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+		  <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
 		<dependency>
 		    <groupId>org.hibernate</groupId>
 		    <artifactId>hibernate-core</artifactId>
-		    <version>4.0.1.Final</version>
+		    <version>4.1.4.Final</version>
 		</dependency>
+
   
   		<dependency>
 		    <groupId>commons-dbcp</groupId>

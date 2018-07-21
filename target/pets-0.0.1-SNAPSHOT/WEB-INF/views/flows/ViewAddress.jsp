@@ -15,6 +15,55 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </head>
+
+<script>
+
+var app = angular.module("myApp", []).controller("myCtrl", function($scope,$http) {
+    
+    $scope.data = [];
+    
+    $scope.BAdd='';
+    $scope.SAdd='';
+
+    $scope.done = false;
+    
+    $http(	{
+    			method: 'POST',
+	      		url: 'http://localhost:8080/shoes/getAddress',
+	      		 headers : {'Content-Type':'application/x-www-form-urlencoded'}
+    			}).then(function(response){
+			    	console.log(response.data);
+			    
+			    	$scope.data = response.data;
+			   
+			    	$scope.BAdd=response.data.SAddr;
+			        $scope.SAdd=response.data.BAddr;
+			        
+			        console.log( $scope.SAdd );
+			        console.log( $scope.BAdd );
+    			});
+    
+ $scope.Update=function(){
+    	
+	 	var json = {"ship":$scope.SAdd,"bill":$scope.BAdd};
+	 
+    	$http(	{
+			method: 'POST',
+      		url: 'http://localhost:8080/shoes/UpdateCartAddToDB',
+      		data:JSON.stringify(json),
+      		 headers : {'Content-Type':'application/json'}
+			}).then(function(response){
+		    	console.log(response.data);
+		    
+		    	if(response.data.msg=="Updated")
+		    	{
+		    		$scope.done = true;	    	
+		    	}
+			});
+    }
+});
+</script>
+
 <body>
 
 <nav class="navbar navbar-inverse" style="border-radius: 0px; border: none; background-color: #cc6600;">
@@ -25,7 +74,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span> 
       </button>
-      <a class="navbar-brand" href="#" style="color: black">Website</a>
+      <a class="navbar-brand" style="color: black">Website</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
@@ -37,10 +86,36 @@
   </div>
 </nav>
 
-<h1>View Address</h1>
-
-<a href="${flowExecutionUrl}&_eventId=goToPage1">Back to Items</a>
-<a href="${flowExecutionUrl}&_eventId=goToPage3">Place Order and Get Invoice</a>
-
+<h1 class="alert alert-success"><center>Confirm Billing Address</center></h1>
+<br><br><br>
+<table class="table table-striped " style="margin: auto; width: 50%;">
+	<thead>
+		<tr>
+      		<th>${currUser} Shipping Address</th>
+			<th>${currUser} Billing Address</th>			
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><textarea rows="5" name="SAddr"  class="form-control" ng-model="SAdd" placeholder="Enter Shipping Address"></textarea></td>
+			<td><textarea rows="5" name="BAddr" class="form-control" ng-model="BAdd"></textarea></td>
+		</tr>
+	</tbody>
+	
+	<tbody>
+		<tr>
+			<td><button ng-click="Update()" class="btn btn-success">Edit</button></td>
+			<td><button ng-click="Update()" class="btn btn-success">Edit</button></td>
+		</tr>
+	</tbody>
+</table>
+<br>
+<br>
+<h1 class="text text-success" ng-show='done' style="margin: auto; width: 80%; text-align: center;">Updated Successfully</h1>
+<br>
+<br>
+<center>
+<a href="${flowExecutionUrl}&_eventId=goToPage1" class="btn btn-success" style=" float:left; margin-left:50px; margin-top:45px">View Cart</a>
+<a href="${flowExecutionUrl}&_eventId=goToPage3" class="btn btn-success" style=" float:right; margin-right:50px; margin-top:45px">Invoice</a></center>
 </body>
 </html>

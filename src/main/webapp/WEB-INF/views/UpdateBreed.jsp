@@ -80,16 +80,22 @@
 
 <br>
 
-<form:form method="post" action="UpdateBreedToDB" modelAttribute="Breed" style="margin: auto; width: 80%; text-align: center;">
+<form:form method="post" action="UpdateBreedToDB" modelAttribute="Breed" style="margin: auto; width: 80%; text-align: center;" enctype="multipart/form-data">
 
 	<br>
-	<form:input path="name" type="text" class="form-control" placeholder="Breed Name" />
+	<form:input path="name" type="text" class="form-control" placeholder="Breed Name"/>
 	
 	<br>
-	<form:input path="average_weight" type="text" class="form-control" placeholder="Breed Average Weight" />
+	<form:input path="average_weight" type="text" class="form-control" placeholder="Breed Average Weight"/>
 	
 	<br>
-	<form:input path="price" type="text" class="form-control" placeholder="Breed Price" />
+	<form:input path="price" type="text" class="form-control" placeholder="Breed Price"/>
+	
+	<br>
+	<form:input path="qty" type="text" class="form-control" placeholder="Breed's Quantity"/>
+
+	<br>
+	<form:input path="f" type="file" class="form-control" placeholder="Add Image"/>
 	
 	<br>
 	<input type="submit" class="btn btn-primary" value="Submit"/>

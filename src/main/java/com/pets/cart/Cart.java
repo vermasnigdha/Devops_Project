@@ -10,7 +10,7 @@ import com.pets.breed.Breed;
 @Entity
 public class Cart {
 
-	Breed b = new Breed();
+	// Breed b = new Breed();
 	
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
