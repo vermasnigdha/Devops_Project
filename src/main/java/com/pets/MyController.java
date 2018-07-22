@@ -248,38 +248,6 @@ public class MyController {
 	{
 		ModelAndView mv = new ModelAndView("redirect:/ViewBreed");
 		
-		try
-		{
-			System.out.println(q.getF());
-			
-			byte bit[] = q.getF().getBytes();
-			
-			System.out.println( req.getRealPath("/") );
-			
-			File f1 = new File( req.getRealPath("/") +  "/image.jpg");
-			
-			 BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(f1));
-	            stream.write(bit);
-	            stream.close();
-	            
-	            Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
-	            		  "cloud_name", "djg9jy82g",
-	            		  "api_key", "743342157914966",
-	            		  "api_secret", "dxG1OSWWEISsKTEaxCMmcdD6YWo"));
-	            
-	            Map uploadResult = cloudinary.uploader().upload(f1, ObjectUtils.emptyMap());
-			
-	            System.out.println( uploadResult );
-	            
-	            System.out.println(uploadResult.get("secure_url").toString());
-	            
-	            q.setImagePath(uploadResult.get("secure_url").toString());
-		}
-		catch( Exception e )
-		{
-			e.printStackTrace();
-		}
-		
 		bdao.update(q);
 		
 		return mv; 
