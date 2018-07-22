@@ -244,7 +244,8 @@ public class MyController {
 	}
 	
 	@RequestMapping(value="/UpdateBreed/UpdateBreedToDB",method=RequestMethod.POST)
-	public ModelAndView UpdatBreedToDB( @ModelAttribute("Breed") Breed q, HttpServletRequest req){
+	public ModelAndView UpdatBreedToDB( @ModelAttribute("Breed") Breed q, HttpServletRequest req)
+	{
 		ModelAndView mv = new ModelAndView("redirect:/ViewBreed");
 		
 		try
