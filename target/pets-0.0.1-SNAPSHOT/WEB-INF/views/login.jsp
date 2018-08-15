@@ -16,7 +16,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span> 
       </button>
-      <a class="navbar-brand" href="#" style="color: black">Website</a>
+      <a class="navbar-brand" style="color: black">Website</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
@@ -61,6 +61,31 @@
 
   </div>
 </div>
+
+<h1 style="margin: auto; width: 80%; text-align: center;">Login</h1>
+<form action="login" method="post" style="margin: auto; width: 90%;">
+
+<br>
+
+<p style="color:black; font-size:25px; float:left">Login</p>
+
+<br>
+<br>
+<br>
+	<span class="text-danger">Email Id: </span>
+	<input type="text" placeholder="Email" class="form-control" id="email" name="a">
+	<br>
+	<span class="text-danger">Password: </span>
+	<input type="password" placeholder="Password" class="form-control" id="pass" name="b">
+	<br>
+	<input type="submit" value="Login" class="btn btn-success" style="width:100%">	
+	<br>
+	<hr>
+	<div class="row" style="width:100%">
+		<div class="col-sm-12"><b>New to ShoeRack? <a href="signup">Register Now</a></b></div>
+	</div>	
+	<br>
+</form>
 
 
 </body>

@@ -17,18 +17,53 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 
 </head>
-<script type="text/javascript">
+<script>
 
-angular.module("myApp",[]).controller("myCtrl",["$scope","$http",function($scope,$http){
+var app = angular.module("myApp" , []).controller("myCtrl" , function($scope,$http){
 	
-	console.log('myApps myCtrl');
+	$scope.data = [];
 	
-	$http({url:"http://localhost:9001/pets/fetchCartItems",method:"POST",headers: {'Content-Type': 'application/json'}}).then(function( response ){
-		console.log(response);
-		
-		$scope.data = response.data;
-	});
-}]);
+	$http( {
+				method: 'POST',
+				url:'http://localhost:8080/shoes/fetchCartItems',
+				headers : {'Content-Type':'application/x-www-form-urlencoded'}
+		}).then(function(response){
+	    	console.log(response.data);
+		    
+	    	$scope.data = response.data;
+	    	
+		});
+	
+$scope.Delete=function(arg){
+    	
+    	alert(arg);
+    	
+    	var json={"id":arg};
+    	
+    	console.log( JSON.stringify(json) );
+    	
+    	$http(	{
+			method: 'POST',
+      		url: 'http://localhost:8080/shoes/deletefromcart',
+      		data:JSON.stringify(json),
+      		 headers : {'Content-Type':'application/json'}
+			}).then(function(response){
+		    	console.log(response.data);
+		    
+		    	//Fetch Again
+		    	$http(	{
+	    			method: 'POST',
+		      		url: 'getAllCartItems',
+		      		 headers : {'Content-Type':'application/x-www-form-urlencoded'}
+	    			}).then(function(response){
+				    	console.log(response.data);
+				    
+				    	$scope.data = response.data;
+				    	
+	    			});
+			});
+    }	
+});
 
 </script>
 
@@ -42,7 +77,7 @@ angular.module("myApp",[]).controller("myCtrl",["$scope","$http",function($scope
         <span class="icon-bar"></span>
         <span class="icon-bar"></span> 
       </button>
-      <a class="navbar-brand" href="#" style="color: black">Website</a>
+      <a class="navbar-brand" style="color: black">Website</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
@@ -54,12 +89,35 @@ angular.module("myApp",[]).controller("myCtrl",["$scope","$http",function($scope
   </div>
 </nav>
 
-<h1>View Cart</h1>
 
-<a href="${pageContext.request.contextPath}/ViewBreed">View All Breeds</a>
-<a href="${flowExecutionUrl}&_eventId=goToPage2">Select Address</a>
+<h1 class="alert alert-success"><center>Display Cart</center></h1>
+<br><br><br>
+<table class="table table-striped" style="margin: auto; width: 80%; text-align: center;">
+	<thead>
+			<tr style="text-align: center;">
+				<th>NAME</th>
+				<th>PRICE</th>
+				<th>QUANTITY</th>
+				<th>Sub Total</th>
+				<th>Image</th>
+				<th>DELETE</th>
+			</tr>
+	</thead>
+	<tbody>		
+		<tr ng-repeat="x in data">
+			<td>{{x.pname}}</td>
+			<td>{{x.pprice}}</td>
+			<td>{{x.pqty}}</td>
+			<td>{{x.pprice*x.pqty}}</td>
+			<td><img src="{{x.pimg}}" style="height: 50px; width: 50px;"></td>
+			<td><a href="#" class="btn btn-danger">Delete</a></td>
+		</tr>
+	</tbody>
+</table>
+<br><br><br>
+<center>
+<a href="${pageContext.request.contextPath}/ViewBreed" class="btn btn-success" style=" float:left; margin-left:50px; margin-top:45px">View All Breeds </a>
 
-<div ng-repeat="x in data">{{x.name}}</div>
-
+<a href="${flowExecutionUrl}&_eventId=goToPage2" class="btn btn-success" style=" float:right; margin-right:50px; margin-top:45px">Confirm Billing Address</a></center>
 </body>
 </html>
